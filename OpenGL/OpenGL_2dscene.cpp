@@ -15,11 +15,11 @@
 
 void RenderText(Shader &shader, std::string text, float x, float y, float scale, glm::vec3 color);
 
-// pencere boyutlarý
+// pencere boyutlarÃ½
 const unsigned int width = 800;
 const unsigned int height = 600;
 
-// yüklenen karakterlerin durum bilgisi tutulur
+// yÃ¼klenen karakterlerin durum bilgisi tutulur
 struct Character
 {
 	unsigned int TextureID;
@@ -33,15 +33,15 @@ unsigned int textVAO, textVBO;
 
 int main()
 {
-	// opengl aktifleþtirilir ve versiyon belirlenir
+	// opengl aktifleÃ¾tirilir ve versiyon belirlenir
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// sahnede bulunan objelerin ve her objenin texturelarýnýn
-	// koordinatlarý
+	// sahnede bulunan objelerin ve her objenin texturelarÃ½nÃ½n
+	// koordinatlarÃ½
 	GLfloat verticesScene[] =
 	{
 		 // koordinatlar	  // renkler	       // doku
@@ -96,15 +96,15 @@ int main()
 		 0.2f,   0.4f,  0.1f,   0.0f, 1.0f, 0.0f,    0.0f, -1.0f
 	};
 	
-	// sahnedeki objeler üçgen cisimler olarak çizilir
-	// bu üçgenlerin çizim indisleri
+	// sahnedeki objeler Ã¼Ã§gen cisimler olarak Ã§izilir
+	// bu Ã¼Ã§genlerin Ã§izim indisleri
 	GLuint indices[] =
 	{
 		0, 1, 2,
 		0, 2, 3,
 	};
 	
-	// opengl penceresi oluþturulur
+	// opengl penceresi oluÃ¾turulur
 	GLFWwindow* window = glfwCreateWindow(width, height, "OpenGL Lab3", NULL, NULL);
 	if(window == NULL)
 	{
@@ -115,8 +115,8 @@ int main()
 	}
 	glfwMakeContextCurrent(window);
 
-	// opengl fonksiyonlarý yüklenir ve 
-	//koordinat sisteminin pencerede nereden baþlayacaðý atanýr
+	// opengl fonksiyonlarÃ½ yÃ¼klenir ve 
+	//koordinat sisteminin pencerede nereden baÃ¾layacaÃ°Ã½ atanÃ½r
 	gladLoadGL();
 	glViewport(0, 0, width, height);
 
@@ -124,16 +124,16 @@ int main()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	// text renderlama için shader oluþturulur
+	// text renderlama iÃ§in shader oluÃ¾turulur
 	Shader shaderText("text.vert", "text.frag");
 	glm::mat4 projText = glm::ortho(0.0f, static_cast<float>(width), 0.0f, static_cast<float>(height));
 	shaderText.use();
 	glUniformMatrix4fv(glGetUniformLocation(shaderText.ID, "projText"), 1, GL_FALSE, glm::value_ptr(projText));
 
-	// shader programý oluþturulur
+	// shader programÃ½ oluÃ¾turulur
 	Shader shaderProgram("default.vert", "default.frag");
 
-	// bufferlar oluþturulur ve baðlanýr
+	// bufferlar oluÃ¾turulur ve baÃ°lanÃ½r
 	GLuint VAO1, VBO1, EBO1,
 		   VAO2, VBO2, EBO2,
 		   VAO3, VBO3, EBO3,
@@ -148,13 +148,13 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesScene), verticesScene, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO1);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// pozisyon baþlangýcý
+	// pozisyon baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// renk baþlangýcý
+	// renk baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	// doku koordinatý baþlangýcý
+	// doku koordinatÃ½ baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
@@ -166,13 +166,13 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesMoon), verticesMoon, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO2);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// pozisyon baþlangýcý
+	// pozisyon baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// renk baþlangýcý
+	// renk baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	// doku koordinatý baþlangýcý
+	// doku koordinatÃ½ baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
@@ -184,13 +184,13 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesMan), verticesMan, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO3);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// pozisyon baþlangýcý
+	// pozisyon baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// renk baþlangýcý
+	// renk baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	// doku koordinatý baþlangýcý
+	// doku koordinatÃ½ baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
@@ -202,13 +202,13 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesGrass), verticesGrass, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO4);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// pozisyon baþlangýcý
+	// pozisyon baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// renk baþlangýcý
+	// renk baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	// doku koordinatý baþlangýcý
+	// doku koordinatÃ½ baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
@@ -220,21 +220,21 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesCat), verticesCat, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO5);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// pozisyon baþlangýcý
+	// pozisyon baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// renk baþlangýcý
+	// renk baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	// doku koordinatý baþlangýcý
+	// doku koordinatÃ½ baÃ¾langÃ½cÃ½
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	// Texturelar oluþturulur, aktive edilir ve baðlanýr
-	// uygun texture birimlerine uygun texturelar yüklenir
+	// Texturelar oluÃ¾turulur, aktive edilir ve baÃ°lanÃ½r
+	// uygun texture birimlerine uygun texturelar yÃ¼klenir
 	GLuint texture1, texture2, texture3,
 		   texture4, texture5, texture6;
 
@@ -359,7 +359,7 @@ int main()
 	stbi_image_free(data);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// freetype init edilir ve font yüklenir
+	// freetype init edilir ve font yÃ¼klenir
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
 	{
@@ -387,8 +387,8 @@ int main()
 	}
 	else
 	{
-		// init ve font yükleme iþlemlerinden sonra
-		// her karakterin glyph'i yüklenir ve saklanýr
+		// init ve font yÃ¼kleme iÃ¾lemlerinden sonra
+		// her karakterin glyph'i yÃ¼klenir ve saklanÃ½r
 		FT_Set_Pixel_Sizes(face, 0, 48);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		for (unsigned char c = 0; c < 128; c++)
@@ -425,7 +425,7 @@ int main()
 	FT_Done_Face(face);
 	FT_Done_FreeType(ft);
 
-	// text renderlama için bufferlar baðlanýr
+	// text renderlama iÃ§in bufferlar baÃ°lanÃ½r
 	glGenVertexArrays(1, &textVAO);
 	glGenBuffers(1, &textVBO);
 	glBindVertexArray(textVAO);
@@ -436,8 +436,8 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	// shader programý çalýþtýrýlýr, ardýndan her texture bir indeks alarak
-	// sahnede ayný anda bulunur
+	// shader programÃ½ Ã§alÃ½Ã¾tÃ½rÃ½lÃ½r, ardÃ½ndan her texture bir indeks alarak
+	// sahnede aynÃ½ anda bulunur
 	shaderProgram.use();
 
 	glUniform1i(glGetUniformLocation(shaderProgram.ID, "texture1"), 0);
@@ -447,7 +447,7 @@ int main()
 	glUniform1i(glGetUniformLocation(shaderProgram.ID, "texture5"), 4);
 	glUniform1i(glGetUniformLocation(shaderProgram.ID, "texture6"), 5);
 
-	// arkaplan rengi atanýr
+	// arkaplan rengi atanÃ½r
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(window);
@@ -459,12 +459,12 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// sahnede objelerin ve texturelarýn daha iyi gözükmesi için
-		// glm kütüphanesi kullanýlýr
+		// sahnede objelerin ve texturelarÃ½n daha iyi gÃ¶zÃ¼kmesi iÃ§in
+		// glm kÃ¼tÃ¼phanesi kullanÃ½lÃ½r
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projScene = glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, -0.15f, -1.1f)); // cisimlerin uzaklýðý ayarlanýr
+		view = glm::translate(view, glm::vec3(0.0f, -0.15f, -1.1f)); // cisimlerin uzaklÃ½Ã°Ã½ ayarlanÃ½r
 		projScene = glm::perspective(glm::radians(45.0f), (float)(width / height), 0.1f, 100.0f);
 
 		int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
@@ -476,7 +476,7 @@ int main()
 
 		shaderProgram.use();
 
-		// her buffer ve her texture sýrayla tekrar baðlanýr ve çizdirilir
+		// her buffer ve her texture sÃ½rayla tekrar baÃ°lanÃ½r ve Ã§izdirilir
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glBindVertexArray(VAO1);
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
@@ -498,14 +498,14 @@ int main()
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 		
 		// text renderlama fomksiyonu
-		// maalesef baþarýsýz
+		// maalesef baÃ¾arÃ½sÃ½z
 		RenderText(shaderText, "Return to Nature", verticesText[0], verticesText[1], 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	// program sonunda bufferlar serbest býrakýlýr
+	// program sonunda bufferlar serbest bÃ½rakÃ½lÃ½r
 	glDeleteVertexArrays(1, &VAO1);
 	glDeleteBuffers(1, &VBO1);
 	glDeleteBuffers(1, &EBO1);
@@ -531,7 +531,7 @@ int main()
 	glDeleteTextures(1, &texture6);
 	glDisable(GL_BLEND);
 
-	// pencere kapanýr ve program sonlanýr
+	// pencere kapanÃ½r ve program sonlanÃ½r
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
@@ -545,7 +545,7 @@ void RenderText(Shader& shader, std::string text, float x, float y, float scale,
 	glActiveTexture(GL_TEXTURE5);
 	glBindVertexArray(textVAO);
 
-	// stringdeki karakterler sýrayla itere edilir
+	// stringdeki karakterler sÃ½rayla itere edilir
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++)
 	{
@@ -556,7 +556,7 @@ void RenderText(Shader& shader, std::string text, float x, float y, float scale,
 
 		float w = ch.Size.x * scale;
 		float h = ch.Size.y * scale;
-		// her karakter için VBO güncellenir
+		// her karakter iÃ§in VBO gÃ¼ncellenir
 		float vertices[6][4] = {
 			{ xpos,     ypos + h,   0.0f, 0.0f },
 			{ xpos,     ypos,       0.0f, 1.0f },
@@ -566,16 +566,16 @@ void RenderText(Shader& shader, std::string text, float x, float y, float scale,
 			{ xpos + w, ypos,       1.0f, 1.0f },
 			{ xpos + w, ypos + h,   1.0f, 0.0f }
 		};
-		// obje üstüne glyph texture'ý baðlanýr
+		// obje Ã¼stÃ¼ne glyph texture'Ã½ baÃ°lanÃ½r
 		glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-		// VBO belleðinin içeriði güncellenir
+		// VBO belleÃ°inin iÃ§eriÃ°i gÃ¼ncellenir
 		glBindBuffer(GL_ARRAY_BUFFER, textVBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); 
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		// obje çizdirilir
+		// obje Ã§izdirilir
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		// imleç bir saða kaydýrýlýr
+		// imleÃ§ bir saÃ°a kaydÃ½rÃ½lÃ½r
 		x += (ch.Advance >> 6) * scale;
 	}
 	glBindVertexArray(0);
