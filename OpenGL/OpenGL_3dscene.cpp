@@ -18,7 +18,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
-// ekran boyutlarý
+// ekran boyutlarÃ½
 const unsigned int width = 800;
 const unsigned int height = 600;
 
@@ -28,19 +28,19 @@ float lastX = (float)width / 2.0;
 float lastY = (float)height / 2.0;
 bool firstMouse = true;
 
-// zamanlayýcýlar
+// zamanlayÃ½cÃ½lar
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 int main()
 {
-	// konfigürasyon
+	// konfigÃ¼rasyon
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// pencere oluþturulur
+	// pencere oluÃ¾turulur
 	GLFWwindow* window = glfwCreateWindow(width, height, "OpenGL Lab5", NULL, NULL);
 	if(window == NULL)
 	{
@@ -49,22 +49,22 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
-	//pencere fonksiyonlarý 
+	//pencere fonksiyonlarÃ½ 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	//mouse fonksiyonlarý
+	//mouse fonksiyonlarÃ½
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
 	// mouse inputu
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	// OpenGL fonksiyonlarý yüklenir
+	// OpenGL fonksiyonlarÃ½ yÃ¼klenir
 	//ve durum belirtilir
 	gladLoadGL();
 	glEnable(GL_DEPTH_TEST);
 
-	// shader oluþturulur ve modeller yüklenir
+	// shader oluÃ¾turulur ve modeller yÃ¼klenir
 	Shader shader("default.vert", "default.frag");
 	Shader shaderLines("new.vert", "new.frag");
 
@@ -76,13 +76,13 @@ int main()
 	Model planet2(FileSystem::getPath("models/planet/planet.obj"));
 	Model rock(FileSystem::getPath("models/rock/rock.obj"));
 	
-	// çaydanlýk modelleri için texturelar yüklenir
+	// Ã§aydanlÃ½k modelleri iÃ§in texturelar yÃ¼klenir
 	unsigned int texture1 = TextureFromFile("green.png", FileSystem::getPath("models/teapot"));
 	unsigned int texture2 = TextureFromFile("top.png", FileSystem::getPath("models/teapot"));
 	unsigned int texture3 = TextureFromFile("wood_dark.png", FileSystem::getPath("models/teapot"));
 	unsigned int texture4 = TextureFromFile("spots.png", FileSystem::getPath("models/teapot"));
 
-	// kooridnat siteminin x ekseni çizdirmek için koordinatlar
+	// kooridnat siteminin x ekseni Ã§izdirmek iÃ§in koordinatlar
 	float verticesX[] = 
 	{
 		 0.0f, 0.0f, 0.0f,
@@ -138,7 +138,7 @@ int main()
 		 50.0f, 0.0f, 0.0f
 	};
 
-	// kooridnat siteminin y ekseni çizdirmek için koordinatlar
+	// kooridnat siteminin y ekseni Ã§izdirmek iÃ§in koordinatlar
 	float verticesY[] = 
 	{ 
 		0.0f, 0.0f, 0.0f,	
@@ -194,7 +194,7 @@ int main()
 		0.0f, 50.0f, 0.0f
 	};
 
-	// kooridnat siteminin z ekseni çizdirmek için koordinatlar
+	// kooridnat siteminin z ekseni Ã§izdirmek iÃ§in koordinatlar
 	float verticesZ[] = 
 	{ 
 		0.0f, 0.0f, 0.0f,	
@@ -250,7 +250,7 @@ int main()
 		0.0f, 0.0f, 50.0f
 	};
 
-	//VAO ve VBO'lar oluþturulup atanýr
+	//VAO ve VBO'lar oluÃ¾turulup atanÃ½r
 	unsigned int VAO1, VBO1, VAO2, VBO2, VAO3, VBO3;
 
 	glGenVertexArrays(1, &VAO1);
@@ -282,7 +282,7 @@ int main()
 
 	while(!glfwWindowShouldClose(window))
 	{
-		//frame baþý zaman mantýðý
+		//frame baÃ¾Ã½ zaman mantÃ½Ã°Ã½
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
@@ -293,7 +293,7 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//dönüþüm matrisleri konfigürasyonu
+		//dÃ¶nÃ¼Ã¾Ã¼m matrisleri konfigÃ¼rasyonu
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 1000.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		shader.use();
@@ -303,8 +303,8 @@ int main()
 		shaderLines.setMat4("projection", projection);
 		shaderLines.setMat4("view", view);
 
-		//modeller ve renkler atanýp VAO'lar baðlanarak
-		//koordinat eksenleri çizilir
+		//modeller ve renkler atanÃ½p VAO'lar baÃ°lanarak
+		//koordinat eksenleri Ã§izilir
 		glm::mat4 modelX = glm::mat4(1.0f);
 		shaderLines.setMat4("model", modelX);
 		shaderLines.setVec3("lineColor", glm::vec3(1.0f, 0.0f, 0.0f));
@@ -326,7 +326,7 @@ int main()
 		shader.use();
 		shader.setInt("texture_diffuse1", 0);
 
-		//1. dönüþüm yapýlarak yeþil çaydanlýk çizdirilir
+		//1. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak yeÃ¾il Ã§aydanlÃ½k Ã§izdirilir
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glm::mat4 modelTeapot1= glm::mat4(1.0f);
 		modelTeapot1 = glm::translate(modelTeapot1, glm::vec3(-10.0f, -10.0f, -10.0f));
@@ -334,14 +334,14 @@ int main()
 		shader.setMat4("model", modelTeapot1);
 		teapot1.Draw(shader);
 
-		//2. dönüþüm yapýlarak gezegen çizdirilir
+		//2. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak gezegen Ã§izdirilir
 		glm::mat4 modelPlanet1 = glm::mat4(1.0f);
 		modelPlanet1 = glm::translate(modelPlanet1, glm::vec3(-10.0f, -10.0f, -10.0f));
 		modelPlanet1 = glm::scale(modelPlanet1, glm::vec3(0.05f, 0.05f, 0.05f));
 		shader.setMat4("model", modelPlanet1);
 		planet1.Draw(shader);
 
-		//3. dönüþüm yapýlarak benekli çaydanlýk çizdirilir
+		//3. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak benekli Ã§aydanlÃ½k Ã§izdirilir
 		glBindTexture(GL_TEXTURE_2D, texture4);
 		glm::mat4 modelTeapot4 = glm::mat4(1.0f);
 		modelTeapot4 = glm::translate(modelTeapot4, glm::vec3(10.0f, 10.0f, 10.0f));
@@ -350,14 +350,14 @@ int main()
 		shader.setMat4("model", modelTeapot4);
 		teapot4.Draw(shader);
 
-		//4. dönüþüm yapýlarak gezegen çizdirilir
+		//4. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak gezegen Ã§izdirilir
 		glm::mat4 modelPlanet2 = glm::mat4(1.0f);
 		modelPlanet2 = glm::translate(modelPlanet2, glm::vec3(10.0f, 10.0f, 10.0f));
 		modelPlanet2 = glm::scale(modelPlanet2, glm::vec3(0.05f, 0.05f, 0.05f));
 		shader.setMat4("model", modelPlanet2);
 		planet2.Draw(shader);
 
-		//5. dönüþüm yapýlarak koyu ahþap çaydanlýk çizdirilir
+		//5. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak koyu ahÃ¾ap Ã§aydanlÃ½k Ã§izdirilir
 		glBindTexture(GL_TEXTURE_2D, texture3);
 		glm::mat4 modelTeapot3 = glm::mat4(1.0f);
 		modelTeapot3 = glm::translate(modelTeapot3, glm::vec3(-10.0f, -10.0f, -10.0f));
@@ -366,7 +366,7 @@ int main()
 		shader.setMat4("model", modelTeapot3);
 		teapot3.Draw(shader);
 
-		//6. dönüþüm yapýlarak koyu mavi çaydanlýk çizdirilir
+		//6. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak koyu mavi Ã§aydanlÃ½k Ã§izdirilir
 		glBindTexture(GL_TEXTURE_2D, texture2);
 		glm::mat4 modelTeapot2 = glm::mat4(1.0f);
 		modelTeapot2 = glm::translate(modelTeapot2, glm::vec3(-1.0f, -1.0f, -1.0f));
@@ -374,7 +374,7 @@ int main()
 		shader.setMat4("model", modelTeapot2);
 		teapot2.Draw(shader);
 
-		//7. dönüþüm yapýlarak kaya çizdirilir
+		//7. dÃ¶nÃ¼Ã¾Ã¼m yapÃ½larak kaya Ã§izdirilir
 		glm::mat4 modelRock = glm::mat4(1.0f);
 		modelRock = glm::translate(modelRock, glm::vec3(-1.0f, -1.0f, -1.0f));
 		modelRock = glm::scale(modelRock, glm::vec3(0.05f, 0.05f, 0.05f));
@@ -385,12 +385,12 @@ int main()
 		glfwPollEvents();
 	}
 
-	// program sonlandýrýlýr
+	// program sonlandÃ½rÃ½lÃ½r
 	glfwTerminate();
 	return 0;
 }
 
-// mouse, klavye ve pencere fonksiyonlarý
+// mouse, klavye ve pencere fonksiyonlarÃ½
 void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
