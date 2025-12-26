@@ -24,7 +24,7 @@ void binomyalKatsayilar(GLint n, GLint* C);
 void bezierNoktasiHesapla(GLfloat u, glm::vec4* bezierNoktasi, GLint kontrolNoktasiSayisi, glm::vec4* kontrolNoktalari, GLint* C);
 void bezier(GLint kontrolNoktasiSayisi, glm::vec4* kontrolNoktalari, GLint BezierEgrisiNoktaSayisi);
 
-// ekran boyutlarý
+// ekran boyutlarÃ½
 const unsigned int width = 800;
 const unsigned int height = 600;
 
@@ -34,19 +34,19 @@ float lastX = (float)width / 2.0;
 float lastY = (float)height / 2.0;
 bool firstMouse = true;
 
-// zamanlayýcýlar
+// zamanlayÃ½cÃ½lar
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 int main()
 {
-	// konfigürasyon
+	// konfigÃ¼rasyon
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// pencere oluþturulur
+	// pencere oluÃ¾turulur
 	GLFWwindow* window = glfwCreateWindow(width, height, "OpenGL Lab6", NULL, NULL);
 	if(window == NULL)
 	{
@@ -55,27 +55,27 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
-	//pencere fonksiyonlarý 
+	//pencere fonksiyonlarÃ½ 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	//mouse fonksiyonlarý
+	//mouse fonksiyonlarÃ½
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 
 	// mouse inputu
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	// OpenGL fonksiyonlarý yüklenir
+	// OpenGL fonksiyonlarÃ½ yÃ¼klenir
 	gladLoadGL();
 	glEnable(GL_DEPTH_TEST);
 
-	// shaderlar oluþturulur ve model yüklenir
+	// shaderlar oluÃ¾turulur ve model yÃ¼klenir
 	Shader shader("default.vert", "default.frag");
 	Shader shaderLines("new.vert", "new.frag");
 
 	Model helecopter(FileSystem::getPath("models/helecopter/chopper.obj"));
 
-	// kooridnat siteminin x ekseni çizdirmek için koordinatlar
+	// kooridnat siteminin x ekseni Ã§izdirmek iÃ§in koordinatlar
 	float verticesX[] = 
 	{
 		 0.0f, 0.0f, 0.0f,
@@ -131,7 +131,7 @@ int main()
 		 50.0f, 0.0f, 0.0f
 	};
 
-	// kooridnat siteminin y ekseni çizdirmek için koordinatlar
+	// kooridnat siteminin y ekseni Ã§izdirmek iÃ§in koordinatlar
 	float verticesY[] = 
 	{ 
 		0.0f, 0.0f, 0.0f,	
@@ -187,7 +187,7 @@ int main()
 		0.0f, 50.0f, 0.0f
 	};
 
-	// kooridnat siteminin z ekseni çizdirmek için koordinatlar
+	// kooridnat siteminin z ekseni Ã§izdirmek iÃ§in koordinatlar
 	float verticesZ[] = 
 	{ 
 		0.0f, 0.0f, 0.0f,	
@@ -243,7 +243,7 @@ int main()
 		0.0f, 0.0f, 50.0f
 	};
 
-	// þerit için kontrol noktalarý
+	// Ã¾erit iÃ§in kontrol noktalarÃ½
 	glm::vec4 controlPoints[5] = 
 	{   {5.0, 5.0, 5.0, 1.0},
 		{5.0, -8.0, -10.0, 1.0},  
@@ -253,7 +253,7 @@ int main()
 	};
 
 
-	//VAO ve VBO'lar oluþturulup atanýr
+	//VAO ve VBO'lar oluÃ¾turulup atanÃ½r
 	unsigned int VAO1, VBO1, VAO2, VBO2, VAO3, VBO3, VAO4, VBO4;
 
 	glGenVertexArrays(1, &VAO1);
@@ -291,22 +291,22 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	// helikopter animasyonu için kullanýlacak bazý deðerler
+	// helikopter animasyonu iÃ§in kullanÃ½lacak bazÃ½ deÃ°erler
 	float rotateVal = 3.0f;
 	GLfloat u;
 	GLint k = 0;
 	while(!glfwWindowShouldClose(window))
 	{
-		// 60 hz için 17 ms uyutma
+		// 60 hz iÃ§in 17 ms uyutma
 		//Sleep(17);
 		
-		//frame baþý zaman mantýðý
+		//frame baÃ¾Ã½ zaman mantÃ½Ã°Ã½
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		// helikopter þeridin son noktasýna ulaþtýðýnda
-		// baþlangýç noktasýna atanýr
+		// helikopter Ã¾eridin son noktasÃ½na ulaÃ¾tÃ½Ã°Ã½nda
+		// baÃ¾langÃ½Ã§ noktasÃ½na atanÃ½r
 		if (k >= 5000)
 			k = 0;
 
@@ -316,7 +316,7 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//dönüþüm matrisleri konfigürasyonu
+		//dÃ¶nÃ¼Ã¾Ã¼m matrisleri konfigÃ¼rasyonu
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 1000.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		shader.use();
@@ -326,8 +326,8 @@ int main()
 		shaderLines.setMat4("projection", projection);
 		shaderLines.setMat4("view", view);
 
-		//modeller ve renkler atanýp VAO'lar baðlanarak
-		//koordinat eksenleri çizilir
+		//modeller ve renkler atanÃ½p VAO'lar baÃ°lanarak
+		//koordinat eksenleri Ã§izilir
 		glm::mat4 modelX = glm::mat4(1.0f);
 		shaderLines.setMat4("model", modelX);
 		shaderLines.setVec3("lineColor", glm::vec3(1.0f, 0.0f, 0.0f));
@@ -346,7 +346,7 @@ int main()
 		glBindVertexArray(VAO3);
 		glDrawArrays(GL_LINES, 0, 51);
 
-		// þerit çizdirilir
+		// Ã¾erit Ã§izdirilir
 		glm::mat4 modelSpline = glm::mat4(1.0f);
 		modelSpline = glm::scale(modelSpline, glm::vec3(5.0f, 5.0f, 5.0f));
 		shaderLines.setMat4("model", modelSpline);
@@ -354,12 +354,12 @@ int main()
 		glBindVertexArray(VAO4);
 		bezier(5, controlPoints, 5000);
 
-		// helikoter çizimi için doku atanýr
+		// helikoter Ã§izimi iÃ§in doku atanÃ½r
 		shader.use();
 		shader.setInt("texture_diffuse1", 0);
 
-		// helikopterin animasyonu için þerit üzerindeki noktalar
-		// her frame'de birer birer oluþturulup tutulur
+		// helikopterin animasyonu iÃ§in Ã¾erit Ã¼zerindeki noktalar
+		// her frame'de birer birer oluÃ¾turulup tutulur
 		GLint* C;
 		C = new GLint[5];
 		binomyalKatsayilar(4, C);
@@ -367,30 +367,30 @@ int main()
 		glm::vec4 next;
 		bezierNoktasiHesapla(u, &next, 5, controlPoints, C);
 
-		// helikopter uygun koordinatlar ve döndürme açýlarý ile
-		// her frame'de uygun pozisyona çizdirilerek animasyon gerçekleþir
+		// helikopter uygun koordinatlar ve dÃ¶ndÃ¼rme aÃ§Ã½larÃ½ ile
+		// her frame'de uygun pozisyona Ã§izdirilerek animasyon gerÃ§ekleÃ¾ir
 		glm::mat4 modelHelecopter = glm::mat4(1.0f);
 		modelHelecopter = glm::translate(modelHelecopter, glm::vec3(5 * next.x, 5 * next.y, 5 * next.z));
 		modelHelecopter = glm::rotate(modelHelecopter, glm::radians(rotateVal), glm::vec3(0.0f, 1.0f, 0.0f));
 		shader.setMat4("model", modelHelecopter);
 		helecopter.Draw(shader);
 
-		// sonraki nokta deðeri için k 1 artýrýlýr ve
-		// her noktada uygun döndürme deðeri için rotateVal artýrýlýr
+		// sonraki nokta deÃ°eri iÃ§in k 1 artÃ½rÃ½lÃ½r ve
+		// her noktada uygun dÃ¶ndÃ¼rme deÃ°eri iÃ§in rotateVal artÃ½rÃ½lÃ½r
 		k += 1;
 		rotateVal += 360.0f / 5000.0f;
 
-		// görüntüyü iþleme fonksiyonlarý
+		// gÃ¶rÃ¼ntÃ¼yÃ¼ iÃ¾leme fonksiyonlarÃ½
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	// program sonlandýrýlýr
+	// program sonlandÃ½rÃ½lÃ½r
 	glfwTerminate();
 	return 0;
 }
 
-// mouse, klavye ve pencere fonksiyonlarý
+// mouse, klavye ve pencere fonksiyonlarÃ½
 void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -437,7 +437,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
 
-// bezier þeridini çizdirmek için kullanýlan fonksiyonlar
+// bezier Ã¾eridini Ã§izdirmek iÃ§in kullanÃ½lan fonksiyonlar
 void noktaCiz(glm::vec4 bezierEgriNoktasi) 
 {
 	glBegin(GL_POINTS);
@@ -445,13 +445,13 @@ void noktaCiz(glm::vec4 bezierEgriNoktasi)
 	glEnd();
 }
 
-/* Verilen n deðerine göre C binomyal katsayýlarýný hesaplar. */
+/* Verilen n deÃ°erine gÃ¶re C binomyal katsayÃ½larÃ½nÃ½ hesaplar. */
 void binomyalKatsayilar(GLint n, GLint* C) 
 {
 	GLint k, j;
 
 	for (k = 0; k <= n; k++) {
-		/* n!/(k!*(n-k)!) hesabý */
+		/* n!/(k!*(n-k)!) hesabÃ½ */
 		C[k] = 1;
 		for (j = n; j >= k + 1; j--)
 			C[k] *= j;
@@ -465,7 +465,7 @@ void bezierNoktasiHesapla(GLfloat u, glm::vec4* bezierNoktasi, GLint kontrolNokt
 	GLint k, n = kontrolNoktasiSayisi - 1;
 	GLfloat bezierTabanFonksiyonu;
 	bezierNoktasi->x = bezierNoktasi->y = bezierNoktasi->z = 0.0;
-	/* Taban fonksiyonlarýný hesapla ve kontrol noktalarýný harmanla */
+	/* Taban fonksiyonlarÃ½nÃ½ hesapla ve kontrol noktalarÃ½nÃ½ harmanla */
 	for (k = 0; k < kontrolNoktasiSayisi; k++) {
 		bezierTabanFonksiyonu = C[k] * (GLfloat)pow(u, k) * (GLfloat)pow(1 - u, n - k);
 		bezierNoktasi->x += kontrolNoktalari[k].x * bezierTabanFonksiyonu;
@@ -479,7 +479,7 @@ void bezier(GLint kontrolNoktasiSayisi, glm::vec4* kontrolNoktalari, GLint Bezie
 	glm::vec4 bezierEgrisiNoktasi;
 	GLfloat u;
 	GLint* C, k;
-	/* Binomyal katsayýlar iiçin alan ayýr. */
+	/* Binomyal katsayÃ½lar iiÃ§in alan ayÃ½r. */
 	C = new GLint[kontrolNoktasiSayisi];
 	binomyalKatsayilar(kontrolNoktasiSayisi - 1, C);
 
