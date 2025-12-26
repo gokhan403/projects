@@ -12,7 +12,7 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-        // programda kullanılacak sabit değer ve değişkenler
+        // programda kullanÃ½lacak sabit deÃ°er ve deÃ°iÃ¾kenler
         private int buttonWidth = 100;
         private int buttonHeight = 100;
         private Button m_emptyButton;
@@ -20,17 +20,17 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
-            // pencere adı ve boyutları girilir
-            this.Text = "Buton Kaydırmaca Oyunu";
+            // pencere adÃ½ ve boyutlarÃ½ girilir
+            this.Text = "Buton KaydÃ½rmaca Oyunu";
             this.ClientSize = new Size(buttonWidth * 5, buttonHeight * 5);
 
-            // pencere boyutları değiştiğinde buton boyutlarının
-            // uygun şekilde ölçeklenmesi sağlanır
+            // pencere boyutlarÃ½ deÃ°iÃ¾tiÃ°inde buton boyutlarÃ½nÃ½n
+            // uygun Ã¾ekilde Ã¶lÃ§eklenmesi saÃ°lanÃ½r
             this.Resize += new EventHandler(resizeHandler);
 
             // butonlar bir arkaplan rengi ve
-            // uygun sayılar ile karışık şekilde pencerede
-            // oluşturulur, bir boşluk bırakılır
+            // uygun sayÃ½lar ile karÃ½Ã¾Ã½k Ã¾ekilde pencerede
+            // oluÃ¾turulur, bir boÃ¾luk bÃ½rakÃ½lÃ½r
             int x, y = 0;
             Color color = Color.FromArgb(138, 167, 188);
             for(int i = 0; i < 5; i++)
@@ -38,7 +38,7 @@ namespace WinFormsApp1
                 x = 0;
                 for(int j = 0; j < 5; j++)
                 {
-                    if (x == 200 && y == 200) // pencerenin ortasında boşluk
+                    if (x == 200 && y == 200) // pencerenin ortasÃ½nda boÃ¾luk
                     {
                         m_emptyButton = new Button();
                         m_emptyButton.Bounds = new Rectangle(x, y, buttonWidth, buttonHeight);
@@ -51,7 +51,7 @@ namespace WinFormsApp1
                     button.Bounds = new Rectangle(x, y, buttonWidth, buttonHeight);
                     button.BackColor = color;
 
-                    // sayıların karışık yerleşmesi sağlanır
+                    // sayÃ½larÃ½n karÃ½Ã¾Ã½k yerleÃ¾mesi saÃ°lanÃ½r
                     Random random = new Random();
                     int randomInt;
                     while (true)
@@ -66,7 +66,7 @@ namespace WinFormsApp1
                         }
                     }
                     button.Text = string.Format("{0}", randomInt);
-                    // uygun butona basıldığında yer değiştirmesi sağlanır
+                    // uygun butona basÃ½ldÃ½Ã°Ã½nda yer deÃ°iÃ¾tirmesi saÃ°lanÃ½r
                     button.Click += new EventHandler(clickHandler); 
                     this.Controls.Add(button);
                     x += buttonWidth;
@@ -75,11 +75,11 @@ namespace WinFormsApp1
             }
         }
 
-        // butonu yer değiştirmek için metod
+        // butonu yer deÃ°iÃ¾tirmek iÃ§in metod
         private void clickHandler(object sender, EventArgs e)
         {
-            // butona basıldığında butonun koordinatları alınır ve
-            // eğer uygun butona basıldıysa buton ve boşluk yer değiştirir
+            // butona basÃ½ldÃ½Ã°Ã½nda butonun koordinatlarÃ½ alÃ½nÃ½r ve
+            // eÃ°er uygun butona basÃ½ldÃ½ysa buton ve boÃ¾luk yer deÃ°iÃ¾tirir
             Button button = (Button) sender;
             if((button.Location.X == m_emptyButton.Location.X - buttonWidth && button.Location.Y == m_emptyButton.Location.Y) ||
                (button.Location.X == m_emptyButton.Location.X + buttonWidth && button.Location.Y == m_emptyButton.Location.Y) ||
@@ -93,15 +93,15 @@ namespace WinFormsApp1
             }
         }
         
-        // butonları uygun şekilde ölçekleyecek metod
+        // butonlarÃ½ uygun Ã¾ekilde Ã¶lÃ§ekleyecek metod
         private void resizeHandler(object sender, EventArgs e)
         {
-            // pencere boyutu değiştiğinde yeni boyutların
-            // butonlara uygun oranı alınır
+            // pencere boyutu deÃ°iÃ¾tiÃ°inde yeni boyutlarÃ½n
+            // butonlara uygun oranÃ½ alÃ½nÃ½r
             buttonWidth = this.ClientSize.Width / 5;
             buttonHeight = this.ClientSize.Height / 5;
 
-            // yeni boyutlar ile butonlar tekrar yazdırılır
+            // yeni boyutlar ile butonlar tekrar yazdÃ½rÃ½lÃ½r
             int x, y = 0;
             for(int i = 0; i < 5; i++)
             {
